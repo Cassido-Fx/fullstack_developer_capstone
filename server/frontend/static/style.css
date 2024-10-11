@@ -124,3 +124,16 @@ img{
     text-align:center;
     box-shadow: 2px 2px 3px #999;  
 }
+
+.contact_body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    text-decoration: blue;
+    margin: 30px;
+}
+
+.contact_body p {
+    color: rgb(42, 220, 199);
+}
+
