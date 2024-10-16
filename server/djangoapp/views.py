@@ -93,12 +93,18 @@ def get_cars(request):
 
 #Update the `get_dealerships` render list of dealerships all by default, particular state if state is passed
 def get_dealerships(request, state="All"):
-    if(state == "All"):
+    dealerships = []  # Initialize dealerships with an empty list
+
+    if state == "All":
         endpoint = "/fetchDealers"
     else:
-        endpoint = "/fetchDealers/"+state
+        endpoint = f"/fetchDealers/{state}"
+    
+    # Make sure that the get_request function is actually fetching the data
     dealerships = get_request(endpoint)
-    return JsonResponse({"status":200,"dealers":dealerships})
+    
+    return JsonResponse({"status": 200, "dealers": dealerships})
+
 
 # Create a `get_dealer_reviews` view to render the reviews of a dealer
 def get_dealer_reviews(request, dealer_id):
@@ -115,13 +121,22 @@ def get_dealer_reviews(request, dealer_id):
         return JsonResponse({"status":400,"message":"Bad Request"})
 
 # Create a `get_dealer_details` view to render the dealer details
+
 def get_dealer_details(request, dealer_id):
-    if(dealer_id):
-        endpoint = "/fetchDealer/"+str(dealer_id)
+    if dealer_id:
+        endpoint = f"/fetchDealer/{str(dealer_id)}"
+        print(f"Fetching dealer details for dealer_id: {dealer_id}")  # Log the dealer ID being fetched
         dealership = get_request(endpoint)
-        return JsonResponse({"status":200,"dealer":dealership})
+
+        print(f"Fetched dealership data: {dealership}")  # Log the fetched dealership data
+
+        if dealership:  # If valid data is returned
+            return JsonResponse({"status": 200, "dealer": dealership})
+        else:  # If no data is returned
+            return JsonResponse({"status": 404, "message": "Dealer not found"})
     else:
-        return JsonResponse({"status":400,"message":"Bad Request"})
+        return JsonResponse({"status": 400, "message": "Bad Request"})
+
 
 # Create a `add_review` view to submit a review
 def add_review(request):
