@@ -4,8 +4,14 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-backend_url = os.getenv('backend_url', default="https://okaforcassy-3030.theiadockernext-0-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai")
-sentiment_analyzer_url = os.getenv('sentiment_analyzer_url', default="https://sentianalyzer.1n3cz1z5pydb.us-south.codeengine.appdomain.cloud")
+backend_url = os.getenv('backend_url',
+                        default="https://okaforcassy-3030.theiadockernext-0-"
+                        "labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai")
+sentiment_analyzer_url = os.getenv(
+    'sentiment_analyzer_url',
+    default="https://sentianalyzer.1n3cz1z5pydb.us-"
+    "south.codeengine.appdomain.cloud")
+
 
 # def get_request(endpoint, **kwargs):
 def get_request(endpoint, **kwargs):
